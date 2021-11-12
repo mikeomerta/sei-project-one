@@ -5,7 +5,7 @@ body {
   height: 100vh;
   margin: 0;
   background-color: yellow;
-  border: green dashed 10px;
+  /* border: green dashed 10px; */
 }
 .heading {
   display: flex;
@@ -51,9 +51,29 @@ body {
   align-items: center;
    /* background-color: red; */
 }
-/* .grid div.pika {
-  background-image: url('../assets/pika-sprite.png');
+.grid div.syringe {
+  background-image: url('../assets/syringe-sprite-2.png');
+  background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
-} */
+  width:60px;
+  height:60px;
+}
+.grid div.virus {
+  background-image: url('../assets/Coronavirus-1.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  width:60px;
+  height:60px;
+}
+.grid div.blast {
+  background-image: url('../assets/Blast.png');
+  background-position: center;
+  background-repeat: no-repeat ;
+  background-size: contain;
+  width: 60px;
+  height: 60px;
+}
