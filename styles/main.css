@@ -1,0 +1,59 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  margin: 0;
+  background-color: yellow;
+  border: green dashed 10px;
+}
+.heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0px;
+}
+.controls-wrapper {
+  height: 10vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* background-color: purple */
+}
+.grid-wrapper {
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: green; */
+}
+
+.grid {
+  align-items: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+  height: 600px;
+  width: 600px;
+  background-color: white;
+}
+.grid div {
+  border: 1px solid black;
+  height: 10%;
+  width: 10%;
+}
+.footer {
+  height: 3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   /* background-color: red; */
+}
+/* .grid div.pika {
+  background-image: url('../assets/pika-sprite.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+} */
