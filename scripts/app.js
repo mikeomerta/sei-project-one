@@ -1,7 +1,8 @@
 // Actions
 
-// make the start button clickable
-// make the click action 
+// get the virus to move acroos 2 squares
+// get the virus to move down 1 row 
+// get the virus to move back 4 squares
 
 
 
@@ -9,17 +10,20 @@
 
 const grid = document.querySelector('.grid')
 const cells = []
+const loadButton = document.querySelector('#load')
 const startButton = document.querySelector('#start')
-
-
 
 
 // * Variables
 
 const width = 10
 const gridCellCount =  width * width
+let enemyPosition = 0
+let fighterPosition = 0
+// let totalEnemies = 0
 
-// const fighterPosition = cells[94]
+
+
 
 
 
@@ -36,30 +40,57 @@ function createGrid() {
 createGrid()
 
 
+
 // * Functions
 
-function handleStart() {
+function addFighter() {
+  cells[fighterPosition].classList.add('syringe')
+}
+function removeFighter() {
+  cells[fighterPosition].classList.remove('syringe')
+}
+function addEnemy() {
+  cells[enemyPosition].classList.add('virus')
+}
+function removeEnemy() {
+  cells[enemyPosition].classList.remove('virus')
+}
+function handleLoad() {
   console.log('button clicked')
-  cells[94].classList.add('syringe')
-  cells[2].classList.add('virus')
-  cells[3].classList.add('virus')
-  cells[4].classList.add('virus')
-  cells[5].classList.add('virus')
-  cells[6].classList.add('virus')
-  cells[7].classList.add('virus')
-  cells[12].classList.add('virus')
-  cells[13].classList.add('virus')
-  cells[14].classList.add('virus')
-  cells[15].classList.add('virus')
-  cells[16].classList.add('virus')
-  cells[17].classList.add('virus')
-  cells[22].classList.add('virus')
-  cells[23].classList.add('virus')
-  cells[24].classList.add('virus')
-  cells[25].classList.add('virus')
-  cells[26].classList.add('virus')
-  cells[27].classList.add('virus')
-  cells[74].classList.add('blast')
+  enemyPosition = 2
+  fighterPosition = 94
+  addFighter()
+  addEnemy()
+}
+function handleStart() {
+  console.log('start game')
+  window.setInterval(() => {
+    removeEnemy()
+    enemyPosition = 3
+    addEnemy()
+  }, 1000)
+}
+
+function handleKeyDown(event) {
+
+  console.log('key pushed')
+
+  removeFighter(fighterPosition) 
+
+  const x = fighterPosition % width
+  
+  switch (event.keyCode) { 
+    case 39 :
+      if (x < width - 1) fighterPosition++
+      break
+    case 37:
+      if (x > 0) fighterPosition--
+      break
+    default:
+      console.log('invalid key do nothing')
+  }
+  
+  addFighter(fighterPosition) 
 }
 
 
@@ -68,4 +99,6 @@ function handleStart() {
 
 // * Events
 
+loadButton.addEventListener('click', handleLoad)
 startButton.addEventListener('click', handleStart)
+document.addEventListener('keydown', handleKeyDown )
