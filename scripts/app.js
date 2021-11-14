@@ -16,15 +16,15 @@ const startButton = document.querySelector('#start')
 
 // * Variables
 
+const enemyPosition = [2, 3, 4, 5, 6, 7, 12, 13, 14, 15, 16, 17, 22, 23, 24, 25, 26, 27]
+
+
 const width = 10
 const gridCellCount =  width * width
-let enemyPosition = 0
-let fighterPosition = 0
-// let totalEnemies = 0
 
 
-
-
+// const x = fighterPosition % width
+// const y = Math.floor(fighterPosition / width)
 
 
 // * Bulding the grid
@@ -40,74 +40,84 @@ function createGrid() {
 createGrid()
 
 
-
 // * Functions
 
-function addFighter() {
-  cells[fighterPosition].classList.add('syringe')
+// function addFighter() {
+//   cells[fighterPosition].classList.add('syringe')
+// }
+
+// function removeFighter() {
+//   cells[fighterPosition].classList.remove('syringe')
+// }
+
+function addEnemy(cellNumber) {
+  cells[cellNumber].classList.add('virus')
 }
-function removeFighter() {
-  cells[fighterPosition].classList.remove('syringe')
+
+function removeEnemy(cellNumber) {
+  cells[cellNumber].classList.remove('virus')
 }
-function addEnemy() {
-  cells[enemyPosition].classList.add('virus')
-}
-function removeEnemy() {
-  cells[enemyPosition].classList.remove('virus')
-}
-function addBlast() {
-  cells[fighterPosition -= width].classList.add('blast')
-}
-function removeBlast() {
-  cells[fighterPosition -= width].classList.remove('blast')
-}
+
+// function addBlast() {
+//   cells[fighterPosition -= width].classList.add('blast')
+// }
+
+// function removeBlast() {
+//   cells[fighterPosition -= width].classList.remove('blast')
+// }
+
 function handleLoad() {
-  enemyPosition = 2
-  fighterPosition = 94
-  addFighter()
-  addEnemy()
+  console.log('handleLoad')
+  enemyPosition.forEach(alien => addEnemy(alien))
+  const fighterStart = cells[94].classList.add('syringe')
+
+  // addFighter()
 }
+
 function handleStart() {
-  console.log('start game')
+  console.log('handleStart')
   window.setInterval(() => {
-    removeEnemy()
-    enemyPosition = 3
-    addEnemy()
+    
+
+    
+    
   }, 1000)
 }
-function handleKeyDown(event) {
-  removeFighter(fighterPosition) 
 
-  const x = fighterPosition % width
-  const y = Math.floor(fighterPosition / width)
-  
-  switch (event.keyCode) { 
-    case 39:
-      if (x < width - 1) fighterPosition++
-      break
-    case 37:
-      if (x > 0) fighterPosition--
-      break
-    case 32: 
-      if (y < width - 1) fighterPosition = 84 
-      addBlast()
-      break
-    default:
-      console.log('invalid key do nothing')
-  }
+// function handleArrowDown(event) {
+//   console.log('handleArrowDown')
+//   removeFighter(fighterPosition) 
+//   switch (event.keyCode) { 
+//     case 39:
+//       if (x < width - 1) fighterPosition++
+//       break
+//     case 37:
+//       if (x > 0) fighterPosition--
+//       break
+//     default:
+//       console.log('invalid key do nothing')
+//   }
+//   addFighter(fighterPosition) 
+// }
 
-  addFighter(fighterPosition) 
-}
-
-
-
-
-
-
+// function handleSpaceDown(event) {
+//   console.log('handleSpaceDown')
+//   removeBlast(blastPosition) 
+//   switch (event.keyCode) { 
+//     case 32: 
+//       if (y < width - 1) blastPosition = 84
+//       addBlast(blastPosition)
+//       break
+//     default:
+//       console.log('invalid key do nothing')
+//   }
+//   addBlast(fighterPosition) 
+// }
 
 
 // * Events
 
 loadButton.addEventListener('click', handleLoad)
 startButton.addEventListener('click', handleStart)
-document.addEventListener('keydown', handleKeyDown )
+// document.addEventListener('keydown', handleArrowDown)
+// document.addEventListener('keydown', handleSpaceDown)
