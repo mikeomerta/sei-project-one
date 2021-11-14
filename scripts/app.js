@@ -55,8 +55,13 @@ function addEnemy() {
 function removeEnemy() {
   cells[enemyPosition].classList.remove('virus')
 }
+function addBlast() {
+  cells[fighterPosition -= width].classList.add('blast')
+}
+function removeBlast() {
+  cells[fighterPosition -= width].classList.remove('blast')
+}
 function handleLoad() {
-  console.log('button clicked')
   enemyPosition = 2
   fighterPosition = 94
   addFighter()
@@ -70,28 +75,32 @@ function handleStart() {
     addEnemy()
   }, 1000)
 }
-
 function handleKeyDown(event) {
-
-  console.log('key pushed')
-
   removeFighter(fighterPosition) 
 
   const x = fighterPosition % width
+  const y = Math.floor(fighterPosition / width)
   
   switch (event.keyCode) { 
-    case 39 :
+    case 39:
       if (x < width - 1) fighterPosition++
       break
     case 37:
       if (x > 0) fighterPosition--
       break
+    case 32: 
+      if (y < width - 1) fighterPosition = 84 
+      addBlast()
+      break
     default:
       console.log('invalid key do nothing')
   }
-  
+
   addFighter(fighterPosition) 
 }
+
+
+
 
 
 
