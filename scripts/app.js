@@ -1,7 +1,10 @@
 // Actions
 
-// if laser collides with alien: add explosion class, delete laser and alien class
-// make alien class dissapear forever. 
+// define boundries (alara - grid movement classwork) 
+// alien bombs
+// concept of lives
+// end game function(aliens hitting fighter, alines being wiped out, bombs hitting fighter)
+// slowing extra shots
 
 
 
@@ -12,7 +15,8 @@ const grid = document.querySelector('.grid')
 const cells = []
 const loadButton = document.querySelector('#load')
 const startButton = document.querySelector('#start')
-// const scoreCard = document.querySelector('.score-display')
+const scoreCard = document.querySelector('#score-display')
+const livesLeftMeter = document.querySelector('#lives-left')
 
 
 //////// * Variables ////////
@@ -24,16 +28,16 @@ let enemyPosition = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 22, 23, 24, 25
 let fighterPosition = 332
 
 let blastPosition = fighterPosition - width
-// let score = 0
+let score = 0
 
 let enemyMovementTracker = 3
 let enemyMovingRight = true
 
+// const xAxis = fighterPosition % width
+// const yAxis = Math.floor(blastPosition / width)
 
-
-const xAxis = fighterPosition % width
-const yAxis = Math.floor(fighterPosition / width)
-
+// let gameOn = true
+// let livesLeft = 3
 
 
 
@@ -77,10 +81,10 @@ function removeBlast() {
   cells[blastPosition].classList.remove('blast')
 }
 function addExplosion() {
-  cells[blastPosition].classList.remove('blast')
+  cells[blastPosition].classList.add('explosion')
 }
 function removeExplosion() {
-  cells[blastPosition].classList.remove('blast')
+  cells[blastPosition].classList.remove('explosion')
 }
 
 // function addBomb() {
@@ -92,7 +96,6 @@ function removeExplosion() {
 
 
 function handleLoad() {
-  console.log('handleLoad')
   enemyPosition.forEach(alien => addEnemy(alien))
   addFighter()
 }
@@ -120,6 +123,7 @@ function handleStart() {
 
 function handleArrowMovement(event) {
   event.preventDefault()
+  const xAxis = fighterPosition % width
   removeFighter(fighterPosition) 
   let blastPosition = fighterPosition - width
   switch (event.keyCode) { 
@@ -130,7 +134,7 @@ function handleArrowMovement(event) {
       if (xAxis > 0) fighterPosition--
       break
     case 38:
-      if (yAxis > 0) handleBlastMovement()
+      handleBlastMovement()
       break
     default:
       console.log('what are you doing solider?')
@@ -138,42 +142,44 @@ function handleArrowMovement(event) {
   addFighter(fighterPosition) 
 }
 
-// function handleBlastAction() {
-//   window.setInterval(() => {
-//     removeBlast()
-//     blastPosition -= width
-//     addBlast()
-//   }, 300)
-// }
+
 
 function handleBlastMovement() {
   blastPosition = fighterPosition 
-
+  // const yAxis = Math.floor(blastPosition / width)
   let blastMovingInterval = window.setInterval(() => {
     removeBlast()
     blastPosition -= width
     addBlast()
-    console.log(blastPosition)
-    // yAxis??
     if (cells[blastPosition].classList.contains('virus')) {
-      console.log('hit hit hit')
       cells[blastPosition].classList.remove('blast', 'virus')
-      cells[blastPosition].classList.add('explosion')
+      addExplosion()
       clearInterval(blastMovingInterval)
       window.setTimeout(() => {
-        cells[blastPosition].classList.remove('explosion')
+        removeExplosion()
       }, 300)
       const enemyIndex = enemyPosition.indexOf(blastPosition)
       enemyPosition.splice(enemyIndex, 1)
-
-      // score = score + 500
-
-      
-    } else 
-      return
+      score = score + 500
+      scoreCard.textContent = score
+    } 
+    // if (yAxis > 0) {
+    //   cells[blastPosition].classList.remove('blast')
+    //   clearInterval(blastMovingInterval)
+    // }
   }, 200)
-
 }
+
+
+// function loseALife() {
+//   livesLeft--
+//   if (livesLeft !== 0) {
+//     livesLeftMeter.textContent = livesLeft
+//   } else {
+//     livesLeftMeter.textContent = 0 
+//     // gameOver (pop up function)
+//   }
+// }
 
 
 

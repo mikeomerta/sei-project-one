@@ -13,6 +13,12 @@ body {
   align-items: center;
   padding: 50px 0px;
 }
+.status-wrapper {
+  height: 10vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
 .controls-wrapper {
   height: 10vh;
   display: flex;
@@ -52,7 +58,7 @@ body {
    /* background-color: red; */
 }
 .grid div.syringe {
-  background-image: url('../assets/Syringe1.png');
+  background-image: url('../assets/Syringe2.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
