@@ -1,8 +1,8 @@
 // Actions
 
-// get the virus to move acroos 2 squares
-// get the virus to move down 1 row 
-// get the virus to move back 4 squares
+// if laser collides with alien: add explosion class, delete laser and alien class
+// make alien class dissapear forever. 
+
 
 
 
@@ -12,7 +12,7 @@ const grid = document.querySelector('.grid')
 const cells = []
 const loadButton = document.querySelector('#load')
 const startButton = document.querySelector('#start')
-const scoreCard = document.querySelector('.score-display')
+// const scoreCard = document.querySelector('.score-display')
 
 
 //////// * Variables ////////
@@ -21,17 +21,13 @@ const width = 19
 const gridCellCount =  width * width
 
 let enemyPosition = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
-let fighterPosition = [332]
+let fighterPosition = 332
+
 let blastPosition = fighterPosition - width
-fighterBlastMoving = 0
-let score = 0
+// let score = 0
 
-
-
-
-aliensMoving  = null
-alienMoveTracker = 7
-aliensMovingRight = true
+let enemyMovementTracker = 3
+let enemyMovingRight = true
 
 
 
@@ -80,40 +76,52 @@ function addBlast() {
 function removeBlast() {
   cells[blastPosition].classList.remove('blast')
 }
+function addExplosion() {
+  cells[blastPosition].classList.remove('blast')
+}
+function removeExplosion() {
+  cells[blastPosition].classList.remove('blast')
+}
+
+// function addBomb() {
+//   cells.classList.add('bomb')
+// }
+// function removeBomb() {
+//   cells.classList.remove('bomb')
+// }
 
 
 function handleLoad() {
   console.log('handleLoad')
   enemyPosition.forEach(alien => addEnemy(alien))
-  cells[fighterPosition]; addFighter()
+  addFighter()
 }
 
 
 function handleStart() {
-aliensMoving = window.setInterval(() => {
+  window.setInterval(() => {
     removingAlien()
 
-    if (alienMoveTracker < 10) {
-      if (aliensMovingRight) {
+    if (enemyMovementTracker < 6) {
+      if (enemyMovingRight) {
         enemyPosition = enemyPosition.map(alien => alien + 1)
       } else {
         enemyPosition = enemyPosition.map(alien => alien - 1)
       }
-      alienMoveTracker++
-    } else if (alienMoveTracker === 10) {
-      alienMoveTracker = 0
+      enemyMovementTracker++ 
+    } else if (enemyMovementTracker === 6) {
+      enemyMovementTracker = 0
       enemyPosition = enemyPosition.map(alien => alien + width)
-      aliensMovingRight = !aliensMovingRight
+      enemyMovingRight = !enemyMovingRight
     }
     addingAlien()
   }, 1000)
 }
 
-
 function handleArrowMovement(event) {
-  console.log('handleArrowMovement')
   event.preventDefault()
   removeFighter(fighterPosition) 
+  let blastPosition = fighterPosition - width
   switch (event.keyCode) { 
     case 39:
       if (xAxis < width - 1) fighterPosition++
@@ -121,39 +129,53 @@ function handleArrowMovement(event) {
     case 37:
       if (xAxis > 0) fighterPosition--
       break
+    case 38:
+      if (yAxis > 0) handleBlastMovement()
+      break
     default:
-      console.log('invalid key do nothing')
+      console.log('what are you doing solider?')
   }
   addFighter(fighterPosition) 
-  addBlast() 
+}
+
+// function handleBlastAction() {
+//   window.setInterval(() => {
+//     removeBlast()
+//     blastPosition -= width
+//     addBlast()
+//   }, 300)
+// }
+
+function handleBlastMovement() {
+  blastPosition = fighterPosition 
+
+  let blastMovingInterval = window.setInterval(() => {
+    removeBlast()
+    blastPosition -= width
+    addBlast()
+    console.log(blastPosition)
+    // yAxis??
+    if (cells[blastPosition].classList.contains('virus')) {
+      console.log('hit hit hit')
+      cells[blastPosition].classList.remove('blast', 'virus')
+      cells[blastPosition].classList.add('explosion')
+      clearInterval(blastMovingInterval)
+      window.setTimeout(() => {
+        cells[blastPosition].classList.remove('explosion')
+      }, 300)
+      const enemyIndex = enemyPosition.indexOf(blastPosition)
+      enemyPosition.splice(enemyIndex, 1)
+
+      // score = score + 500
+
+      
+    } else 
+      return
+  }, 200)
+
 }
 
 
-
-function handleBlastMovement (event) {
-  event.preventDefault()
-  console.log('Im firing over here')
-  if (event.keycode === 38) {
-    let blastPosition = fighterPosition - width
-    fighterBlastMoving = window.setInterval(() => {
-      if(yAxis === 0) {
-        removeBlast()
-      } else if (cells[blastPosition].classlist.contains('virus')) {
-        removeBlast()
-        const enemyIndex = enemyPosition.indexOf(blastPosition)
-        enemyPosition.splice(enemyIndex, 1)
-        score = score + 500
-        console.log(score)
-        window.clearInterval(fighterBlastMoving)
-      } else {
-        removeBlast()
-        blastPosition = blastPosition - width
-        addBlast()
-      }
-    }, 500)
-
-  }
-}
 
 
 
@@ -162,4 +184,5 @@ function handleBlastMovement (event) {
 loadButton.addEventListener('click', handleLoad)
 startButton.addEventListener('click', handleStart)
 document.addEventListener('keydown', handleArrowMovement)
-document.addEventListener('keydown', handleBlastMovement)
+
+

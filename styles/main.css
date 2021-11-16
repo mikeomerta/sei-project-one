@@ -52,7 +52,7 @@ body {
    /* background-color: red; */
 }
 .grid div.syringe {
-  background-image: url('../assets/syringe-sprite-2.png');
+  background-image: url('../assets/Syringe1.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -77,3 +77,20 @@ body {
   width: 47px;
   height: 47px;
 }
+.grid div.bomb {
+  background-image: url('../assets/VirusBomb.png');
+  background-position: center;
+  background-repeat: no-repeat ;
+  background-size: contain;
+  width: 47px;
+  height: 47px;
+}
+.grid div.explosion {
+  background-image: url('../assets/Explosion.png');
+  background-position: center;
+  background-repeat: no-repeat ;
+  background-size: contain;
+  width: 47px;
+  height: 47px;
+}
+
