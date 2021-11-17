@@ -7,6 +7,44 @@ body {
   background-color: rgb(223, 223, 94);
   /* border: green dashed 10px; */
 }
+#prompt-box-overlay {
+  display: none;
+  opacity: .8;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background: whitesmoke;
+  width: 100%;
+  z-index: 10;
+}
+#prompt-box {
+  display: none;
+  position: fixed;
+  background: black;
+  border-radius: 7px;
+  width: 550px;
+  z-index: 10;
+}
+#prompt-box > div {
+  background: white;
+  margin: 8px;
+}
+#prompt-box-header {
+  background: #666;
+  font-size: 19px;
+  padding: 10px;
+    color: #CCC
+}
+#prompt-box-body {
+  background: #333;
+  padding: 20px;
+  color: #FFF
+}
+#prompt-box-footer {
+  background: #666;
+  padding: 10px;
+  text-align: right;
+}
 .heading {
   display: flex;
   justify-content: center;
@@ -69,7 +107,7 @@ body {
   height:47px;
 }
 .grid div.virus {
-  background-image: url('../assets/Coronavirus-1.png');
+  background-image: url('../assets/VirusBomb.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -86,7 +124,7 @@ body {
   height: 47px;
 }
 .grid div.bomb {
-  background-image: url('../assets/VirusBomb.png');
+  background-image: url('../assets/Coronavirus-1.png');
   background-position: center;
   background-repeat: no-repeat ;
   background-size: contain;

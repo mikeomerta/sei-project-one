@@ -1,10 +1,12 @@
 // Actions
 
-// define boundries (alara - grid movement classwork) 
-// alien bombs
-// concept of lives
-// end game function(aliens hitting fighter, alines being wiped out, bombs hitting fighter)
-// slowing extra shots
+// fighter explosion not disappearing
+// cant shoot alien bombs
+// lives left meter
+
+// stretch goal - speeding up aliens as 19 (width) dissapear
+
+// CSS (audio, pop up, start pop up)
 
 
 
@@ -33,8 +35,7 @@ let score = 0
 let enemyMovementTracker = 3
 let enemyMovingRight = true
 
-// let gameOn = true
-// let livesLeft = 3
+let livesLeft = 3
 
 
 
@@ -71,12 +72,6 @@ function removingAlien() {
 function addingAlien() {
   enemyPosition.forEach(alien => addEnemy(alien))
 }
-function addBomb(bombIndex) {
-  cells[bombIndex].classList.add('bomb')
-}
-function removeBomb() {
-  cells.classList.remove('bomb')
-}
 
 
 function handleLoad() {
@@ -102,8 +97,10 @@ function handleStart() {
       enemyMovingRight = !enemyMovingRight
     }
     addingAlien()
+    handlegameOver() 
 
   }, 1000)
+  handleEnemyBomb()
 }
 
 function handleArrowMovement(event) {
@@ -125,7 +122,6 @@ function handleArrowMovement(event) {
       console.log('what are you doing solider?')
   }
   addFighter(fighterPosition) 
-  // handleEnemyBomb()
 }
 
 function handleBlastMovement() {
@@ -153,44 +149,54 @@ function handleBlastMovement() {
 }
 
 function handleEnemyBomb() {
-  
-  let bombIndex = enemyPosition[Math.floor(Math.random() * enemyPosition.length)]
-  
-  const alienWMD = setInterval(() => {
-
-
+  // const alienWMD = 
+  setInterval(() => {
+    let bombIndex = enemyPosition[Math.floor(Math.random() * enemyPosition.length)]
     const alienBombMovement = setInterval(() => {
-      console.log('dropping bombs y\'all')
+      cells[bombIndex].classList.remove('bomb')
+      bombIndex += width
+      cells[bombIndex].classList.add('bomb')
 
-
-
-      
-      if (bombIndex = fighterPosition) {
-        removeFighter()
+      if (cells[bombIndex].classList.contains('syringe')) {
         clearInterval(alienBombMovement)
-        // loseALife()
-        // addFighter()
+        cells[bombIndex].classList.remove('syringe')
+        cells[bombIndex].classList.add('explosion')
+        livesLeftMeter.textContent = livesLeft - 1
+        window.setTimeout(() => {
+          cells[fighterPosition].classList.add('syringe')
+        }, 300)
         console.log('hit hit hit')
-      } else if (bombIndex >= width) {
-        removeBomb()
+      } else if (bombIndex >= 341) {
         clearInterval(alienBombMovement)
+        cells[bombIndex].classList.remove('bomb')
         console.log('miss miss miss')
       }
-    }, 400)
-  
-  }, 500)
+      if (cells[bombIndex].classList.contains('blast')) {
+        clearInterval(alienBombMovement)
+        cells[bombIndex].classList.remove('blast', 'bomb')
+        cells[bombIndex].classList.add('explosion')
+        window.setTimeout(() => {
+          cells[bombIndex].classList.remove('explosion')
+        }, 100)
+        score = score + 100
+        scoreCard.textContent = score } 
+    }, 500)
+  }, 2000)
 }
 
 
-// function loseALife() {
-//   livesLeft--
-//   if (livesLeft !== 0) {
-//     livesLeftMeter.textContent = livesLeft
-//   } else {
-//     livesLeftMeter.textContent = 0 
-//     // gameOver (pop up function)
-//   }
-// }
+
+function handlegameOver() {
+  if (cells[fighterPosition].classList.contains('virus')) {
+    window.alert('Game Over')
+  }
+  if (livesLeft === 0) {
+    window.alert('Game Over')
+  }
+  if (enemyPosition.length === 0) {
+    window.alert('Game Over')
+  } 
+}
 
 
 
