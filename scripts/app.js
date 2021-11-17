@@ -27,14 +27,11 @@ const gridCellCount =  width * width
 let enemyPosition = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
 let fighterPosition = 332
 
-let blastPosition = fighterPosition - width
+
 let score = 0
 
 let enemyMovementTracker = 3
 let enemyMovingRight = true
-
-// const xAxis = fighterPosition % width
-// const yAxis = Math.floor(blastPosition / width)
 
 // let gameOn = true
 // let livesLeft = 3
@@ -74,25 +71,12 @@ function removingAlien() {
 function addingAlien() {
   enemyPosition.forEach(alien => addEnemy(alien))
 }
-function addBlast() {
-  cells[blastPosition].classList.add('blast')
+function addBomb(bombIndex) {
+  cells[bombIndex].classList.add('bomb')
 }
-function removeBlast() {
-  cells[blastPosition].classList.remove('blast')
+function removeBomb() {
+  cells.classList.remove('bomb')
 }
-function addExplosion() {
-  cells[blastPosition].classList.add('explosion')
-}
-function removeExplosion() {
-  cells[blastPosition].classList.remove('explosion')
-}
-
-// function addBomb() {
-//   cells.classList.add('bomb')
-// }
-// function removeBomb() {
-//   cells.classList.remove('bomb')
-// }
 
 
 function handleLoad() {
@@ -118,6 +102,7 @@ function handleStart() {
       enemyMovingRight = !enemyMovingRight
     }
     addingAlien()
+
   }, 1000)
 }
 
@@ -125,7 +110,7 @@ function handleArrowMovement(event) {
   event.preventDefault()
   const xAxis = fighterPosition % width
   removeFighter(fighterPosition) 
-  let blastPosition = fighterPosition - width
+  // let blastPosition = fighterPosition - width
   switch (event.keyCode) { 
     case 39:
       if (xAxis < width - 1) fighterPosition++
@@ -140,34 +125,60 @@ function handleArrowMovement(event) {
       console.log('what are you doing solider?')
   }
   addFighter(fighterPosition) 
+  // handleEnemyBomb()
 }
 
-
-
 function handleBlastMovement() {
-  blastPosition = fighterPosition 
-  // const yAxis = Math.floor(blastPosition / width)
-  let blastMovingInterval = window.setInterval(() => {
-    removeBlast()
+  let blastPosition = fighterPosition 
+  const blastMovingInterval = window.setInterval(() => {
+    cells[blastPosition].classList.remove('blast')
     blastPosition -= width
-    addBlast()
+    cells[blastPosition].classList.add('blast')
     if (cells[blastPosition].classList.contains('virus')) {
       cells[blastPosition].classList.remove('blast', 'virus')
-      addExplosion()
+      cells[blastPosition].classList.add('explosion')
       clearInterval(blastMovingInterval)
       window.setTimeout(() => {
-        removeExplosion()
+        cells[blastPosition].classList.remove('explosion')
       }, 300)
       const enemyIndex = enemyPosition.indexOf(blastPosition)
       enemyPosition.splice(enemyIndex, 1)
       score = score + 500
       scoreCard.textContent = score
-    } 
-    // if (yAxis > 0) {
-    //   cells[blastPosition].classList.remove('blast')
-    //   clearInterval(blastMovingInterval)
-    // }
-  }, 200)
+    } else if (blastPosition <= width) {
+      clearInterval(blastMovingInterval)
+      cells[blastPosition].classList.remove('blast')
+    }
+  }, 300)
+}
+
+function handleEnemyBomb() {
+  
+  let bombIndex = enemyPosition[Math.floor(Math.random() * enemyPosition.length)]
+  
+  const alienWMD = setInterval(() => {
+
+
+    const alienBombMovement = setInterval(() => {
+      console.log('dropping bombs y\'all')
+
+
+
+      
+      if (bombIndex = fighterPosition) {
+        removeFighter()
+        clearInterval(alienBombMovement)
+        // loseALife()
+        // addFighter()
+        console.log('hit hit hit')
+      } else if (bombIndex >= width) {
+        removeBomb()
+        clearInterval(alienBombMovement)
+        console.log('miss miss miss')
+      }
+    }, 400)
+  
+  }, 500)
 }
 
 

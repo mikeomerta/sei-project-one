@@ -43,12 +43,14 @@ body {
   justify-content: center;
   height: 895px;
   width: 895px;
+  /* background-image: url('../assets/space-background.png'); */
   background-color: white;
 }
 .grid div {
   border: 1px solid black;
   height: 47px;
   width: 47px;
+  color: black;
 }
 .footer {
   height: 3vh;
