@@ -1,14 +1,3 @@
-// Actions
-
-// continual lives lost loop
-// game stops when aliens reach line of fighterposition
-
-// stretch goal - speeding up aliens as 19 (width) dissapear
-
-// CSS (audio, pop up, start pop up, instructions)
-
-
-
 
 //////// * DOM Elements ////////
 
@@ -25,34 +14,27 @@ const livesLeftMeter = document.querySelector('#lives-left')
 
 const width = 19
 const gridCellCount =  width * width
-
 let enemyPosition = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53]
 let fighterPosition = 332
-
-
 let score = 0
-
 let enemyMovementTracker = 3
 let enemyMovingRight = true
-
 let livesLeft = 3
-
-
 
 //////// * Bulding the grid ////////
 
 function createGrid() {
   for (let i = 0; i < gridCellCount; i++) {
     const cell = document.createElement('div')
-    cell.textContent = i
     cells.push(cell)
     grid.appendChild(cell)
   }
 }
 createGrid()
 
-
 //////// * Functions ////////
+
+// Condensed Functions //
 
 function addFighter() {
   cells[fighterPosition].classList.add('syringe')
@@ -73,11 +55,13 @@ function addingAlien() {
   enemyPosition.forEach(alien => addEnemy(alien))
 }
 
+// Button Functions //
 
 function handleLoad() {
   enemyPosition.forEach(alien => addEnemy(alien))
   addFighter()
 }
+
 function handleStart() {
   window.setInterval(() => {
     removingAlien()
@@ -98,9 +82,12 @@ function handleStart() {
   }, 1000)
   handleEnemyBomb()
 }
+
 function handleReset() {
   window.location.reload()
 }
+
+// Movement Fnctions //
 
 function handleArrowMovement(event) {
   event.preventDefault()
@@ -140,9 +127,10 @@ function handleBlastMovement() {
       enemyPosition.splice(enemyIndex, 1)
       score = score + 500
       scoreCard.textContent = score
-    } if (cells[blastPosition].classList.contains('bomb')) {
+    } else if (cells[blastPosition].classList.contains('bomb')) {
       clearInterval(blastMovingInterval)
-      cells[blastPosition].classList.remove('blast', 'bomb')
+      cells[blastPosition].classList.remove('blast')
+      cells[blastPosition].classList.remove('bomb')
       cells[blastPosition].classList.add('explosion')
       window.setTimeout(() => {
         cells[blastPosition].classList.remove('explosion')
@@ -153,11 +141,10 @@ function handleBlastMovement() {
       clearInterval(blastMovingInterval)
       cells[blastPosition].classList.remove('blast')
     }
-  }, 300)
+  }, 200)
 }
 
 function handleEnemyBomb() {
-  // const alienWMD = 
   setInterval(() => {
     let bombIndex = enemyPosition[Math.floor(Math.random() * enemyPosition.length)]
     const alienBombMovement = setInterval(() => {
@@ -180,9 +167,11 @@ function handleEnemyBomb() {
       } else if (bombIndex >= 341) {
         clearInterval(alienBombMovement)
         cells[bombIndex].classList.remove('bomb')
-      } if (cells[bombIndex].classList.contains('blast')) {
+      } else if (cells[bombIndex].classList.contains('blast')) {
+        console.log('this is the bomb one')
         clearInterval(alienBombMovement)
-        cells[bombIndex].classList.remove('blast', 'bomb')
+        cells[bombIndex].classList.remove('blast')
+        cells[bombIndex].classList.remove('bomb')
         cells[bombIndex].classList.add('explosion')
         window.setTimeout(() => {
           cells[bombIndex].classList.remove('explosion')
@@ -194,33 +183,29 @@ function handleEnemyBomb() {
   }, 2000)
 }
 
-
+// Admin Functions //
 
 function handlegameOver() {
   if (cells[fighterPosition].classList.contains('virus')) {
     grid.textContent = 'You caught Covid-19. Self-isolate for 10 days and come back and try again!'
-    document.querySelector('.grid').style.color = '#ff0000'
-    document.querySelector('.grid').style.fontSize = '100px'
+    document.querySelector('.grid').style.color = '	#7fff00'
+    document.querySelector('.grid').style.fontSize = '60px'
     document.querySelector('.grid').style.fontWeight = 'bolder'
     document.querySelector('.grid').style.textAlign = 'center'
   } if (livesLeft === 0) {
     grid.textContent = 'Out of lives solider. Pick up your mask and try again!'
-    document.querySelector('.grid').style.color = '#ff0000'
-    document.querySelector('.grid').style.fontSize = '100px'
+    document.querySelector('.grid').style.color = '	#7fff00'
+    document.querySelector('.grid').style.fontSize = '60px'
     document.querySelector('.grid').style.fontWeight = 'bolder'
     document.querySelector('.grid').style.textAlign = 'center'
   } if (enemyPosition.length === 0) {
     grid.textContent = 'You defeated the Coronvirus!'
-    document.querySelector('.grid').style.color = '#ff0000'
-    document.querySelector('.grid').style.fontSize = '100px'
+    document.querySelector('.grid').style.color = '	#7fff00'
+    document.querySelector('.grid').style.fontSize = '60px'
     document.querySelector('.grid').style.fontWeight = 'bolder'
     document.querySelector('.grid').style.textAlign = 'center'
   } 
 }
-
-
-
-
 
 //////// * Events ////////
 

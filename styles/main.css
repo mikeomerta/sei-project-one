@@ -2,75 +2,64 @@
   box-sizing: border-box;
 }
 body {
-  height: 100vh;
-  margin: 0;
-  background-color: rgb(223, 223, 94);
-  /* border: green dashed 10px; */
+  height: 115vh;
+  margin: 10px;
+  background-color: yellow;
+  border: green dashed 15px;
 }
-/* #prompt-box-overlay {
-  display: none;
-  opacity: .8;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  background: whitesmoke;
-  width: 100%;
-  z-index: 10;
-}
-#prompt-box {
-  display: none;
-  position: fixed;
-  background: black;
-  border-radius: 7px;
-  width: 550px;
-  z-index: 10;
-}
-#prompt-box > div {
-  background: white;
-  margin: 8px;
-}
-#prompt-box-header {
-  background: #666;
-  font-size: 19px;
-  padding: 10px;
-    color: #CCC
-}
-#prompt-box-body {
-  background: #333;
-  padding: 20px;
-  color: #FFF
-}
-#prompt-box-footer {
-  background: #666;
-  padding: 10px;
-  text-align: right;
-} */
 .heading {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 50px 0px;
+  padding: 20px 0px;
 }
 .status-wrapper {
-  height: 10vh;
+  height: 7vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0 0 20px 0;
+  font-family: 'Orbitron', sans-serif;
+}
+.controls-wrapper {
+  height: 12vh;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
-.controls-wrapper {
-  height: 10vh;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  /* background-color: purple */
+#load {
+  background-position: center;
+  background-repeat: no-repeat ;
+  background-size: contain;
+  height: 40px;
+  width: 100px;
+  border: 2px black;
+  border-radius: 7px;
+}
+#start {
+  background-position: center;
+  background-repeat: no-repeat ;
+  background-size: contain;
+  height: 40px;
+  width: 100px;
+  border: 3px black solid;
+  border-radius: 7px;
+}
+#reset {
+  background-position: center;
+  background-repeat: no-repeat ;
+  background-size: contain;
+  height: 40px;
+  width: 100px;
+  border: 2px black solid;
+  border-radius: 7px;
 }
 .grid-wrapper {
   height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: green; */
-}
+  }
 
 .grid {
   align-items: center;
@@ -81,8 +70,8 @@ body {
   justify-content: center;
   height: 895px;
   width: 895px;
-  /* background-image: url('../assets/Space-Background.png'); */
-  background-color: white;
+  background-image: url('../assets/Space-Background.png');
+  transition: all 1s ease-out;
 }
 .grid div {
   border: 1px solid black;
@@ -90,31 +79,17 @@ body {
   width: 47px;
   color: black
 }
-/* #load {
-  height: 4vh;
-  border-radius: 7px;
-  border: 4px solid black; 
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-#start{
-  height: 4vh;
-  border-radius: 40px;
-  border: 1px solid black; 
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}   */
 .footer {
   height: 3vh;
   display: flex;
   justify-content: center;
   align-items: center;
-   /* background-color: red; */
+  font-family: 'Orbitron', sans-serif;
+  padding: 0 0 10px 0;
+  text-align: center;
 }
 .grid div.syringe {
-  background-image: url('../assets/Syringe2.png');
+  background-image: url('../assets/Syringe.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -140,15 +115,15 @@ body {
   height: 47px;
 }
 .grid div.bomb {
-  background-image: url('../assets/Coronavirus-1.png');
+  background-image: url('../assets/Virus-Bomb.png');
   background-position: center;
   background-repeat: no-repeat ;
-  background-size: contain;
+  background-size:contain;
   width: 47px;
   height: 47px;
 }
 .grid div.explosion {
-  background-image: url('../assets/Explosion2.png');
+  background-image: url('../assets/Explosion.png');
   background-position: center;
   background-repeat: no-repeat ;
   background-size: contain;
