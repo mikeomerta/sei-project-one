@@ -1,4 +1,5 @@
 
+
 //////// * DOM Elements ////////
 
 const grid = document.querySelector('.grid')
@@ -6,6 +7,7 @@ const cells = []
 const loadButton = document.querySelector('#load')
 const startButton = document.querySelector('#start')
 const resetButton = document.querySelector('#reset')
+const instructionButton = document.querySelector('#instruction')
 const scoreCard = document.querySelector('#score-display')
 const livesLeftMeter = document.querySelector('#lives-left')
 
@@ -20,6 +22,7 @@ let score = 0
 let enemyMovementTracker = 3
 let enemyMovingRight = true
 let livesLeft = 3
+
 
 //////// * Bulding the grid ////////
 
@@ -79,12 +82,16 @@ function handleStart() {
     }
     addingAlien()
     handlegameOver() 
-  }, 1000)
+  }, 600)
   handleEnemyBomb()
 }
 
 function handleReset() {
   window.location.reload()
+}
+
+function handleInstruction() {
+  window.alert('Captain Tom needs your help in defeating the evil Coronavirus. Use your skills to defeat them and save the world. \n\nKeys: Arrow Left - Left \nArrow Right - Right \nArrow Up - Shoot \n\nGood luck solider!')
 }
 
 // Movement Fnctions //
@@ -129,8 +136,11 @@ function handleBlastMovement() {
       scoreCard.textContent = score
     } else if (cells[blastPosition].classList.contains('bomb')) {
       clearInterval(blastMovingInterval)
+      clearInterval(parseInt(cells[blastPosition].dataset.interval))
+      console.log(parseInt(cells[blastPosition].dataset.interval))
       cells[blastPosition].classList.remove('blast')
       cells[blastPosition].classList.remove('bomb')
+      console.log(cells[blastPosition].dataset)
       cells[blastPosition].classList.add('explosion')
       window.setTimeout(() => {
         cells[blastPosition].classList.remove('explosion')
@@ -147,12 +157,14 @@ function handleBlastMovement() {
 function handleEnemyBomb() {
   setInterval(() => {
     let bombIndex = enemyPosition[Math.floor(Math.random() * enemyPosition.length)]
-    const alienBombMovement = setInterval(() => {
+    const alienBombInterval = setInterval(() => {
       cells[bombIndex].classList.remove('bomb')
+      cells[bombIndex].removeAttribute('data-interval')
       bombIndex += width
       cells[bombIndex].classList.add('bomb')
+      cells[bombIndex].setAttribute('data-interval', alienBombInterval)
       if (cells[bombIndex].classList.contains('syringe')) {
-        clearInterval(alienBombMovement)
+        clearInterval(alienBombInterval)
         cells[bombIndex].classList.remove('syringe')
         cells[bombIndex].classList.add('explosion')
         cells[bombIndex].classList.remove('bomb')
@@ -165,11 +177,10 @@ function handleEnemyBomb() {
           cells[fighterPosition].classList.add('syringe')
         }, 500)
       } else if (bombIndex >= 341) {
-        clearInterval(alienBombMovement)
+        clearInterval(alienBombInterval)
         cells[bombIndex].classList.remove('bomb')
       } else if (cells[bombIndex].classList.contains('blast')) {
-        console.log('this is the bomb one')
-        clearInterval(alienBombMovement)
+        clearInterval(alienBombInterval)
         cells[bombIndex].classList.remove('blast')
         cells[bombIndex].classList.remove('bomb')
         cells[bombIndex].classList.add('explosion')
@@ -188,20 +199,20 @@ function handleEnemyBomb() {
 function handlegameOver() {
   if (cells[fighterPosition].classList.contains('virus')) {
     grid.textContent = 'You caught Covid-19. Self-isolate for 10 days and come back and try again!'
-    document.querySelector('.grid').style.color = '	#7fff00'
-    document.querySelector('.grid').style.fontSize = '60px'
+    document.querySelector('.grid').style.color = '	#008000'
+    document.querySelector('.grid').style.fontSize = '40px'
     document.querySelector('.grid').style.fontWeight = 'bolder'
     document.querySelector('.grid').style.textAlign = 'center'
   } if (livesLeft === 0) {
     grid.textContent = 'Out of lives solider. Pick up your mask and try again!'
-    document.querySelector('.grid').style.color = '	#7fff00'
-    document.querySelector('.grid').style.fontSize = '60px'
+    document.querySelector('.grid').style.color = '	#008000'
+    document.querySelector('.grid').style.fontSize = '40px'
     document.querySelector('.grid').style.fontWeight = 'bolder'
     document.querySelector('.grid').style.textAlign = 'center'
   } if (enemyPosition.length === 0) {
-    grid.textContent = 'You defeated the Coronvirus!'
-    document.querySelector('.grid').style.color = '	#7fff00'
-    document.querySelector('.grid').style.fontSize = '60px'
+    grid.textContent = 'You defeated the Coronvirus. The pubs can now reopen!'
+    document.querySelector('.grid').style.color = '	#008000'
+    document.querySelector('.grid').style.fontSize = '40px'
     document.querySelector('.grid').style.fontWeight = 'bolder'
     document.querySelector('.grid').style.textAlign = 'center'
   } 
@@ -212,6 +223,5 @@ function handlegameOver() {
 loadButton.addEventListener('click', handleLoad)
 startButton.addEventListener('click', handleStart)
 resetButton.addEventListener('click', handleReset)
+instructionButton.addEventListener('click', handleInstruction)
 document.addEventListener('keydown', handleArrowMovement)
-
-

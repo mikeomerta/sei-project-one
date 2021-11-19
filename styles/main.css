@@ -33,8 +33,12 @@ body {
   background-size: contain;
   height: 40px;
   width: 100px;
-  border: 2px black;
+  border: 3px black solid;
   border-radius: 7px;
+  transition: all .2s ease-in;
+}
+#load:hover {
+  box-shadow: 5px 5px 2px black;
 }
 #start {
   background-position: center;
@@ -44,6 +48,10 @@ body {
   width: 100px;
   border: 3px black solid;
   border-radius: 7px;
+  transition: all .2s ease-in;
+}
+#start:hover {
+  box-shadow: 5px 5px 2px black;
 }
 #reset {
   background-position: center;
@@ -51,8 +59,25 @@ body {
   background-size: contain;
   height: 40px;
   width: 100px;
-  border: 2px black solid;
+  border: 3px black solid;
   border-radius: 7px;
+  transition: all .2s ease-in;
+}
+#reset:hover {
+  box-shadow: 5px 5px 2px black;
+}
+#instruction {
+  background-position: center;
+  background-repeat: no-repeat ;
+  background-size: contain;
+  height: 40px;
+  width: 160px;
+  border: 3px black solid;
+  border-radius: 7px;
+  transition: all .2s ease-in;
+}
+#instruction:hover {
+  box-shadow: 5px 5px 2px black;
 }
 .grid-wrapper {
   height: 70vh;
@@ -60,7 +85,6 @@ body {
   justify-content: center;
   align-items: center;
   }
-
 .grid {
   align-items: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
@@ -71,7 +95,7 @@ body {
   height: 895px;
   width: 895px;
   background-image: url('../assets/Space-Background.png');
-  transition: all 1s ease-out;
+  transition: all 2s ease-in;
 }
 .grid div {
   border: 1px solid black;
@@ -110,7 +134,7 @@ body {
   background-image: url('../assets/Blast.png');
   background-position: center;
   background-repeat: no-repeat ;
-  background-size: contain;
+  background-size: 40%;
   width: 47px;
   height: 47px;
 }
@@ -118,7 +142,7 @@ body {
   background-image: url('../assets/Virus-Bomb.png');
   background-position: center;
   background-repeat: no-repeat ;
-  background-size:contain;
+  background-size:50%;
   width: 47px;
   height: 47px;
 }
@@ -130,4 +154,3 @@ body {
   width: 47px;
   height: 47px;
 }
-
