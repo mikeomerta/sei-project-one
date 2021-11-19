@@ -94,7 +94,7 @@ body {
   justify-content: center;
   height: 895px;
   width: 895px;
-  background-image: url('../assets/Space-Background.png');
+  background-image: url(../assets/spacebackground.png);
   transition: all 2s ease-in;
 }
 .grid div {
@@ -113,7 +113,7 @@ body {
   text-align: center;
 }
 .grid div.syringe {
-  background-image: url('../assets/Syringe.png');
+  background-image: url(../assets/syringe.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -122,7 +122,7 @@ body {
   height:47px;
 }
 .grid div.virus {
-  background-image: url('../assets/Virus.png');
+  background-image: url(../assets/virus.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -131,7 +131,7 @@ body {
   height:47px;
 }
 .grid div.blast {
-  background-image: url('../assets/Blast.png');
+  background-image: url(../assets/blast.png);
   background-position: center;
   background-repeat: no-repeat ;
   background-size: 40%;
@@ -139,7 +139,7 @@ body {
   height: 47px;
 }
 .grid div.bomb {
-  background-image: url('../assets/Virus-Bomb.png');
+  background-image: url(../assets/virusbomb.png);
   background-position: center;
   background-repeat: no-repeat ;
   background-size:50%;
@@ -147,7 +147,7 @@ body {
   height: 47px;
 }
 .grid div.explosion {
-  background-image: url('../assets/Explosion.png');
+  background-image: url(../assets/explosion.png);
   background-position: center;
   background-repeat: no-repeat ;
   background-size: contain;
