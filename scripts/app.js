@@ -82,7 +82,7 @@ function handleStart() {
     }
     addingAlien()
     handlegameOver() 
-  }, 600)
+  }, 300)
   handleEnemyBomb()
 }
 
@@ -210,7 +210,7 @@ function handlegameOver() {
     document.querySelector('.grid').style.fontWeight = 'bolder'
     document.querySelector('.grid').style.textAlign = 'center'
   } if (enemyPosition.length === 0) {
-    grid.textContent = 'You defeated the Coronvirus. The pubs can now reopen!'
+    grid.textContent = 'You defeated the Coronavirus. The pubs can now reopen!'
     document.querySelector('.grid').style.color = '	#008000'
     document.querySelector('.grid').style.fontSize = '40px'
     document.querySelector('.grid').style.fontWeight = 'bolder'

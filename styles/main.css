@@ -113,7 +113,7 @@ body {
   text-align: center;
 }
 .grid div.syringe {
-  background-image: url(../assets/syringe.png);
+  background-image: url(../assets/Syringe.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -122,7 +122,7 @@ body {
   height:47px;
 }
 .grid div.virus {
-  background-image: url(../assets/virus.png);
+  background-image: url(../assets/Virus.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -131,7 +131,7 @@ body {
   height:47px;
 }
 .grid div.blast {
-  background-image: url(../assets/blast.png);
+  background-image: url(../assets/Blast.png);
   background-position: center;
   background-repeat: no-repeat ;
   background-size: 40%;
@@ -147,7 +147,7 @@ body {
   height: 47px;
 }
 .grid div.explosion {
-  background-image: url(../assets/explosion.png);
+  background-image: url(../assets/Explosion.png);
   background-position: center;
   background-repeat: no-repeat ;
   background-size: contain;
