@@ -162,7 +162,9 @@ I would say that the three things I took away from the project were the followin
 ## Known Bugs
 
 There is still an occasional issue with the Fighter Blast. The Fighter Blast sometimes does not disappear when striking an Alien Bomb. This does not occur every time and finding a way to isolate the bug was too time consuming and in the end I had to deploy the game with the bug. It occurs perhaps one in ten times a Fighter Blast hits an Alien Bomb but the bomb does dissappear so it was a bug I had to let go in order to complete the game. 
-Future Improvements
+
+## Future Improvements
+
 I would like to make different levels of the game to allow there to be an easy, medium and hard level. I would like to make the game mobile responsive because currently it was created on a large monitor I have and when I go to play it on smaller screens you lose some visibility of the design outside of the grid.
 
 I would like to create pop ups for the game over function and for the instructions. I would like a homepage/pop up as well that appears first as the game is loaded. This would contain the instructions perhaps or some story about that game. 
