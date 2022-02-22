@@ -1,4 +1,4 @@
-# Software Engineering Immersive: Project 1
+# General Assembly Software Engineering Immersive: Project 1
 
 ![homepage](assets/Screenshot%202022-02-22%20at%2011.59.06.png?raw=true/500x500)
 
